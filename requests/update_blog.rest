@@ -1,0 +1,7 @@
+PUT http://localhost:3003/api/blogs/623cdc89ab7669c2d8230255
+content-type: application/json
+
+{   
+    "author": "Gozo",
+    "url": "url"
+}

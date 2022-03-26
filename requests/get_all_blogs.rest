@@ -1,0 +1,13 @@
+GET http://localhost:3003/api/blogs
+
+
+### SELECT ONLY ONE BY ID
+GET http://localhost:3003/api/blogs/623cdc89ab7669c2d8230255
+
+
+### BAD ID
+GET http://localhost:3003/api/blogs/623cdc89ab7669c2d8230290
+
+
+### WHEN YOU PUT ANYTHING
+GET http://localhost:3003/api/blogs/Helloword
