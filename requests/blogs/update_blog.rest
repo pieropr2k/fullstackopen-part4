@@ -1,0 +1,23 @@
+PUT http://localhost:3003/api/blogs/6240a0bb45e7d45625e5b781
+content-type: application/json
+
+{   
+    "author": "Hernandez",
+    "url": "thislink.com.pe"
+}
+
+
+### Update a blog with a wrong blog id
+PUT http://localhost:3003/api/blogs/6240a126fdbafbdcef674118
+content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3RhIiwiaWQiOiI2MjNmZmRlNmUzNjAwODY2NTUxYjIxNzgiLCJpYXQiOjE2NDg2NTgyMjksImV4cCI6MTY0ODY2MTgyOX0.gl7SxOllxgSWRqu5jENDYtJzSu6zPqeeqpyCVVlDK7s
+
+{   
+    "author": "Boza",
+    "url": "thislink.com.pe"
+}
+
+
+### Update a blog with a wrong blog id format
+PUT http://localhost:3003/api/blogs/hello_world
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3RhIiwiaWQiOiI2MjNmZmRlNmUzNjAwODY2NTUxYjIxNzgiLCJpYXQiOjE2NDg2NTgyMjksImV4cCI6MTY0ODY2MTgyOX0.gl7SxOllxgSWRqu5jENDYtJzSu6zPqeeqpyCVVlDK7s

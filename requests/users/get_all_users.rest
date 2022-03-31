@@ -1,8 +1,8 @@
-GET http://localhost:3003/api/blogs
+GET http://localhost:3003/api/users
 
 
 ### SELECT ONLY ONE BY ID
-GET http://localhost:3003/api/blogs/623cdc89ab7669c2d8230255
+GET http://localhost:3003/api/blogs/623ffde6e3600866551b2178
 
 
 ### BAD ID

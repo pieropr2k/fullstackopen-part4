@@ -1,0 +1,39 @@
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+    "username": "dorian",
+    "name": "joker",
+    "password": "lavoe"
+}
+
+
+### Create blog with a -3 length password
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+    "username": "redes",
+    "name": "Supermario",
+    "password": "sa"
+}
+
+
+### Create blog without password
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+    "username": "redes",
+    "name": "Supermario"
+}
+
+
+### Create blog without username
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+    "name": "Supermario",
+    "password": "sau"
+}

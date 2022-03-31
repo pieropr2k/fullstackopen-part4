@@ -1,0 +1,22 @@
+DELETE http://localhost:3003/api/blogs/623eb04dfdbf6b215f5bf767
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3RhIiwiaWQiOiI2MjNmZmRlNmUzNjAwODY2NTUxYjIxNzgiLCJpYXQiOjE2NDg1NzAyNDgsImV4cCI6MTY0ODU3Mzg0OH0.87snHayeoLlm6lPVH75SuZKPF9KwJw8topHdlfM4Mj4
+
+
+### Delete a blog without being the user
+DELETE http://localhost:3003/api/blogs/6240a126fdbafbdcef6741b1
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3RhIiwiaWQiOiI2MjNmZmRlNmUzNjAwODY2NTUxYjIxNzgiLCJpYXQiOjE2NDg2NTgyMjksImV4cCI6MTY0ODY2MTgyOX0.gl7SxOllxgSWRqu5jENDYtJzSu6zPqeeqpyCVVlDK7s
+
+
+### Delete a blog with a wrong blog id
+DELETE http://localhost:3003/api/blogs/6240a126fdbafbdcef674118
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3RhIiwiaWQiOiI2MjNmZmRlNmUzNjAwODY2NTUxYjIxNzgiLCJpYXQiOjE2NDg2NTgyMjksImV4cCI6MTY0ODY2MTgyOX0.gl7SxOllxgSWRqu5jENDYtJzSu6zPqeeqpyCVVlDK7s
+
+
+### Delete a blog with a wrong blog id format
+DELETE http://localhost:3003/api/blogs/hello_world
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3RhIiwiaWQiOiI2MjNmZmRlNmUzNjAwODY2NTUxYjIxNzgiLCJpYXQiOjE2NDg2NTgyMjksImV4cCI6MTY0ODY2MTgyOX0.gl7SxOllxgSWRqu5jENDYtJzSu6zPqeeqpyCVVlDK7s
+
+
+### Delete a blog with a wrong token
+DELETE http://localhost:3003/api/blogs/6240a126fdbafbdcef674167
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3RhIiwiaWQiOiI2MjNmZmRlNmUzNjAwODY2NTUxYjIxNzgiLCJpYXQiOjE2NDg2NTgyMjksImV4cCI6MTY0ODY2MTgyOX0.gl7SxOllxgSWRqu5jENDYtJzSu6zPqeeqpyCVVlDK10
