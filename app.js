@@ -25,14 +25,17 @@ app.use(cors())
 // If is there's not this line, for example: the request.body will be undefined
 app.use(express.json())
 
-app.use('/api/blogs', blogsRouter)
+//app.use(middleware.tokenExtractor)
+//app.use(middleware.userExtractor)
+
+// Exercise 4.22
+app.use('/api/blogs', middleware.tokenExtractor, middleware.userExtractor, blogsRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 
-app.use(cors())
+//app.use(cors())
 //app.use(express.static('build'))
 app.use(middleware.requestLogger)
-
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
 

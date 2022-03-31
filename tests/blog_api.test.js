@@ -5,10 +5,12 @@ const app = require('../app')
 const Blog = require('../models/blog')
 const User = require('../models/user')
 const { initialBlogs, blogsInDb, usersInDb } = require('./test_helper')
+const jwt = require('jsonwebtoken')
 
 const api = supertest(app)
 
 describe('blog api requests', () => {
+  let auth_token = ''
   let userID = ''
 
   beforeAll(async () => {
@@ -16,22 +18,17 @@ describe('blog api requests', () => {
     const passwordHash = await bcrypt.hash('sekret', 10)
     const user = new User({ username: 'root', name: 'Superuser', passwordHash })
     await user.save()
+    const userBeforeLog = {
+      username: user.username,
+      id: user.id
+    }
     userID = user.id
+    auth_token = 'bearer ' + jwt.sign(userBeforeLog, process.env.SECRET)
+    //console.log(auth_token, '- auth_token')
   })
 
   beforeEach(async () => {
     await Blog.deleteMany({})
-    //console.log('cleared')  // 1st executed
-    /*
-    initialBlogs.forEach(async (oneblog) => {
-      let blogObject = new Blog(oneblog)
-      await blogObject.save()
-      console.log('saved')  // real last executed
-      // after the tests have run
-    })
-    // 2nd executed
-    console.log('done')
-    */
     // Other method:
     //console.log(userID, '- user id before each')
     const blogObjects = initialBlogs.map(blog => new Blog({ ...blog, user: userID }))
@@ -43,7 +40,7 @@ describe('blog api requests', () => {
   describe('when there is initially some blogs saved', () => {
     // Exercise 4.8
     test('blogs are returned as json', async () => {
-      //console.log('entered test') //'last' executed
+      //console.log('entered test') //  'last' executed
       await api
         .get('/api/blogs')
         .expect(200)
@@ -73,11 +70,13 @@ describe('blog api requests', () => {
         title: 'Peru',
         author: 'Fallen',
         url: 'whatever',
-        likes: 24,
-        userId: userID
+        likes: 24
       }
+      // Exercise 4.24
       await api
         .post('/api/blogs')
+        // We put the Authorization header token here to run the post request
+        .set('Authorization', auth_token)
         .send(newBlog)
         .expect(201)
         .expect('Content-Type', /application\/json/)
@@ -87,16 +86,36 @@ describe('blog api requests', () => {
       expect(blogsAtEnd.map(n => n.author)).toContain('Fallen')
     })
 
+    // Exercise 4.23
+    test('a valid blog cannot be added with the incorrect token', async () => {
+      //console.log(auth_token, '- add blog token')
+      const newBlog = {
+        title: 'Peru',
+        author: 'Fallen',
+        url: 'whatever',
+        likes: 24
+      }
+      await api
+        .post('/api/blogs')
+        .set('Authorization', 'bearer hello_world')
+        .send(newBlog)
+        .expect(401)
+
+      const blogsAtEnd = await blogsInDb()
+      expect(blogsAtEnd).toHaveLength(initialBlogs.length)
+      expect(blogsAtEnd.map(n => n.author)).not.toContain('Fallen')
+    })
+
     // Exercise 4.11
     test('blog without likes is still valid', async () => {
       const newBlog = {
         title: 'Pizza',
         author: 'Mauricio',
-        url: 'whatever fm',
-        userId: userID
+        url: 'whatever fm'
       }
       await api
         .post('/api/blogs')
+        .set('Authorization', auth_token)
         .send(newBlog)
         .expect(201)
         .expect('Content-Type', /application\/json/)
@@ -110,11 +129,11 @@ describe('blog api requests', () => {
     test('blog without title and url is not added', async () => {
       const newBlog = {
         author: 'Donna',
-        likes: 70,
-        userId: userID
+        likes: 70
       }
       await api
         .post('/api/blogs')
+        .set('Authorization', auth_token)
         .send(newBlog)
         .expect(400)
 
@@ -131,14 +150,17 @@ describe('blog api requests', () => {
       //console.log(blogsAtStart[0]._id, '- first blog objected _id')
       //console.log(blogsAtStart[0].id, '- first blog string id')
       //console.log(auth_token, ': delete blog token')
+
+      // Exercise 4.23
       await api
         .delete(`/api/blogs/${blogsAtStart[0].id}`)
+        // We put the Authorization header token here to run the delete request
+        .set('Authorization', auth_token)
         .expect(204)
 
       const blogsAtEnd = await blogsInDb()
-      expect(blogsAtEnd).toHaveLength(
-        initialBlogs.length - 1
-      )
+      expect(blogsAtEnd).toHaveLength(initialBlogs.length - 1)
+
       const contents = blogsAtEnd.map(r => r.author)
       expect(contents).not.toContain(blogsAtStart[0].author)
     })
@@ -148,6 +170,7 @@ describe('blog api requests', () => {
       await api
         // This is a random blog id that doesn't exists in the db
         .delete('/api/blogs/6240a126fdbafbdcef671234')
+        .set('Authorization', auth_token)
         .expect(401)
 
       const blogsAtEnd = await blogsInDb()
@@ -177,6 +200,7 @@ describe('blog api requests', () => {
   })
 })
 
+
 describe('when there is initially one user in db', () => {
   beforeEach(async () => {
     await User.deleteMany({})
@@ -187,6 +211,7 @@ describe('when there is initially one user in db', () => {
 
   test('that invalid users are not created: password not minimum 3 length', async () => {
     const usersAtStart = await usersInDb()
+
     const newUser = {
       username: 'taxidrive',
       name: 'Mattias Lukaku',

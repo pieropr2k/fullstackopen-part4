@@ -1,45 +1,42 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3RhIiwiaWQiOiI2MjNmZmRlNmUzNjAwODY2NTUxYjIxNzgiLCJpYXQiOjE2NDg2NTMzMjAsImV4cCI6MTY0ODY1NjkyMH0.BB48My7OvVufn3nENlgVVg0AR5d1AfTBanNkFGr67LI
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3RhIiwiaWQiOiI2MjNmZmRlNmUzNjAwODY2NTUxYjIxNzgiLCJpYXQiOjE2NDg3Njg2NDMsImV4cCI6MTY0ODc3MjI0M30.rDnwPIuz_bHPYxoFAUaMl76UPzsFZGtOoiDF9rvccfs
 
 {
-    "author": "Lets see",
-    "title": "Come",
+    "author": "Lets add",
+    "title": "Final",
     "url": "Anderson",
-    "likes": 79,
-    "userId": "623ffdd5e3600866551b2175"
+    "likes": 139
 }
 
 
 ### Create blog without likes
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3RhIiwiaWQiOiI2MjNmZmRlNmUzNjAwODY2NTUxYjIxNzgiLCJpYXQiOjE2NDg2NTMzMjAsImV4cCI6MTY0ODY1NjkyMH0.BB48My7OvVufn3nENlgVVg0AR5d1AfTBanNkFGr67LI
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3RhIiwiaWQiOiI2MjNmZmRlNmUzNjAwODY2NTUxYjIxNzgiLCJpYXQiOjE2NDg2ODc1MzAsImV4cCI6MTY0ODY5MTEzMH0.P2OO1SOtfxtxxvYQS51WcKB3gWmDr4nQQwgkKQCE-T0
 
 {
     "author": "Without",
     "title": "Madrid",
-    "url": "rock",
-    "userId": "623ffdd5e3600866551b2175"
+    "url": "rock"
 }
 
 
 ### Create blog without url
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3RhIiwiaWQiOiI2MjNmZmRlNmUzNjAwODY2NTUxYjIxNzgiLCJpYXQiOjE2NDg2NTMzMjAsImV4cCI6MTY0ODY1NjkyMH0.BB48My7OvVufn3nENlgVVg0AR5d1AfTBanNkFGr67LI
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3RhIiwiaWQiOiI2MjNmZmRlNmUzNjAwODY2NTUxYjIxNzgiLCJpYXQiOjE2NDg2ODc1MzAsImV4cCI6MTY0ODY5MTEzMH0.P2OO1SOtfxtxxvYQS51WcKB3gWmDr4nQQwgkKQCE-T0
 
 {
     "author": "Without",
-    "title": "Madrid",
-    "userId": "623ffdd5e3600866551b2175"
+    "title": "Madrid"
 }
 
 
 ### wrong token auth
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3RhIiwiaWQiOiI2MjNmZmRlNmUzNjAwODY2NTUxYjIxNzgiLCJpYXQiOjE2NDg2MTk1NzEsImV4cCI6MTY0ODYyMzE3MX0.EoTEOLsQ5UBIhZTuvcjEGeYRlVBHNERf878x1KSuchh
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3RhIiwiaWQiOiI2MjNmZmRlNmUzNjAwODY2NTUxYjIxNzgiLCJpYXQiOjE2NDg2ODc1MzAsImV4cCI6MTY0ODY5MTEzMH0.P2OO1SOtfxtxxvYQS51WcKB3gWmDr4nQQwgkKQCE409
 
 {
     "author": "Liviano",
